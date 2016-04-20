@@ -60,9 +60,10 @@ For example to add a Redis cache to your configuration:
 #!/bin/bash
 
 cat <<EOF >> $CARAVEL_HOME/caravel_config.py
-CACHE_TYPE = redis
-CACHE_REDIS_HOST = myredishost.com
-CACHE_REDIS_PORT = 6379
+CACHE_CONFIG = {
+  'CACHE_TYPE': 'RedisCache',
+  'CACHE_REDIS_URL': 'localhost:6379'
+}
 EOF
 ```
 
