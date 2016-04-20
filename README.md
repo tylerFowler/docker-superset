@@ -35,19 +35,7 @@ tylerfowler/caravel
 
 ## Modifying Database Backends
 
-In order to keep this image as lean as possible only the chosen backend will have drivers installed. In order to do this the `$DB_PACKAGES` and `$DB_PIP_PACKAGES` can be changed to reflect whatever drivers are needed, though in the future this will be changed to a switch where you can specify something like `$CARAVEL_BACKEND=mysql` and `$CARAVEL_DATASOURCE_TYPE=postgres`.
-
-For example to use mysql as the Caravel backend and allow us to use Postgres as our datasource:
-```bash
-docker run -d --name caravel \
-  -e DB_PACKAGES="libmysqlclient-dev libpq-dev" \
-  -e DB_PIP_PACKAGES="mysqlclient psycopg2" \
-  -e CAR_META_DB_URI="mysql://user:pwd@host:port/db" \
-  -p 8088:8088 \
-tylerfowler/caravel
-```
-
-This will install only the packages needed for MySQL and Postgres.
+In order to keep the base image as lean as possible only the Postgres driver is included and any other database drivers or libraries that are needed should be installed in a downstream image. To use a different backend you just need to install the appropriate drivers and modify the `$CAR_META_DB_URI` to be the database connection string for the backend, which is only used in the entrypoint script at runtime.
 
 ## Modifying the Caravel Configuration
 

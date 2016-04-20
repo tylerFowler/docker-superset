@@ -11,7 +11,7 @@ ENV CAR_SECRET_KEY='thisismysecretkey'
 ENV CAR_META_DB_URI="sqlite:///${CARAVEL_HOME}/caravel.db"
 ENV CAR_CSRF_ENABLED=True
 
-ENV PYTHONPATH=$CARAVAL_HOME/caravel_config.py:$PYTHONPATH
+ENV PYTHONPATH=$CARAVEL_HOME/caravel_config.py:$PYTHONPATH
 
 # admin auth details
 ENV ADMIN_USERNAME=admin
@@ -20,11 +20,7 @@ ENV ADMIN_LAST_NAME=user
 ENV ADMIN_EMAIL=admin@nowhere.com
 ENV ADMIN_PWD=caravel
 
-# can specify a list of required apt & pip packages for whatever DB is being
-# used, by default only includes PostgreSQL because I'm selfish
-
-# TODO: use variables like CARAVEL_BACKEND and CARAVEL_DATASOURCE_TYPE to set to
-# database common names, with a switch that installs the deps for each
+# by default only includes PostgreSQL because I'm selfish
 ENV DB_PACKAGES=libpq-dev
 ENV DB_PIP_PACKAGES=psycopg2
 
