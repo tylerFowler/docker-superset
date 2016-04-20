@@ -11,7 +11,7 @@ ENV CAR_SECRET_KEY='thisismysecretkey'
 ENV CAR_META_DB_URI="sqlite:///${CARAVEL_HOME}/caravel.db"
 ENV CAR_CSRF_ENABLED=True
 
-ENV PYTHONPATH=$CARAVEL_HOME/caravel_config.py:$PYTHONPATH
+ENV PYTHONPATH=$CARAVEL_HOME:$PYTHONPATH
 
 # admin auth details
 ENV ADMIN_USERNAME=admin
@@ -31,7 +31,7 @@ RUN pip install $DB_PIP_PACKAGES flask-appbuilder
 RUN pip install caravel==$CARAVEL_VERSION
 
 # remove build dependencies
-RUN apt-get remove -y build-essential libssl-dev libffi-dev \
+RUN apt-get remove -y build-essential libffi-dev \
 && apt-get -y autoremove && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir $CARAVEL_HOME
