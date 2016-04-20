@@ -2,27 +2,27 @@ FROM python:2.7-wheezy
 MAINTAINER Tyler Fowler <tylerfowler.1337@gmail.com>
 
 # Caravel setup options
-ENV CARAVEL_VERSION=0.8.8
-ENV CARAVEL_HOME=/caravel
-ENV CAR_ROW_LIMIT=5000
-ENV CAR_WEBSERVER_THREADS=8
-ENV CAR_WEBSERVER_PORT=8088
-ENV CAR_SECRET_KEY='thisismysecretkey'
-ENV CAR_META_DB_URI="sqlite:///${CARAVEL_HOME}/caravel.db"
-ENV CAR_CSRF_ENABLED=True
+ENV CARAVEL_VERSION 0.8.8
+ENV CARAVEL_HOME /caravel
+ENV CAR_ROW_LIMIT 5000
+ENV CAR_WEBSERVER_THREADS 8
+ENV CAR_WEBSERVER_PORT 8088
+ENV CAR_SECRET_KEY 'thisismysecretkey'
+ENV CAR_META_DB_URI "sqlite:///${CARAVEL_HOME}/caravel.db"
+ENV CAR_CSRF_ENABLED True
 
-ENV PYTHONPATH=$CARAVEL_HOME:$PYTHONPATH
+ENV PYTHONPATH $CARAVEL_HOME:$PYTHONPATH
 
 # admin auth details
-ENV ADMIN_USERNAME=admin
-ENV ADMIN_FIRST_NAME=admin
-ENV ADMIN_LAST_NAME=user
-ENV ADMIN_EMAIL=admin@nowhere.com
-ENV ADMIN_PWD=caravel
+ENV ADMIN_USERNAME admin
+ENV ADMIN_FIRST_NAME admin
+ENV ADMIN_LAST_NAME user
+ENV ADMIN_EMAIL admin@nowhere.com
+ENV ADMIN_PWD caravel
 
 # by default only includes PostgreSQL because I'm selfish
-ENV DB_PACKAGES=libpq-dev
-ENV DB_PIP_PACKAGES=psycopg2
+ENV DB_PACKAGES libpq-dev
+ENV DB_PIP_PACKAGES psycopg2
 
 RUN apt-get update \
 && apt-get install -y build-essential libssl-dev libffi-dev $DB_PACKAGES
