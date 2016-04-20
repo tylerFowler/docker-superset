@@ -58,4 +58,4 @@ EOF
 fi
 
 echo "Starting up Caravel"
-caravel runserver
+caravel runserver -d
