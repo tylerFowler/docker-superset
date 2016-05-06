@@ -55,6 +55,9 @@ EOF
   caravel init
 
   touch $CARAVEL_HOME/.setup-complete
+else
+  # always upgrade the database, running any pending migrations
+  caravel db upgrade
 fi
 
 echo "Starting up Caravel"
