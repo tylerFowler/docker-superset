@@ -1,6 +1,8 @@
 Caravel
 ===============
 
+[![](https://images.microbadger.com/badges/image/tylerfowler/caravel.svg)](https://microbadger.com/images/tylerfowler/caravel "Get your own image badge on microbadger.com")
+
 An extendable Docker image for Airbnb's [Caravel](airbnb.io/caravel) platform.
 
 # Basic Setup
