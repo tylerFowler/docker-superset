@@ -28,12 +28,15 @@ RUN apt-get update \
 && apt-get install -y \
   build-essential \
   libssl-dev libffi-dev libsasl2-dev libldap2-dev \
-  $DB_PACKAGES \
 && pip install --no-cache-dir \
   $DB_PIP_PACKAGES flask-appbuilder caravel==$CARAVEL_VERSION \
 && apt-get remove -y \
   build-essential libssl-dev libffi-dev libsasl2-dev libldap2-dev \
 && apt-get -y autoremove && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# install DB packages separately
+RUN apt-get update && apt-get install -y $DB_PACKAGES \
+&& apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # remove build dependencies
 RUN mkdir $CARAVEL_HOME
