@@ -2,7 +2,7 @@ FROM python:2.7-wheezy
 MAINTAINER Tyler Fowler <tylerfowler.1337@gmail.com>
 
 # Caravel setup options
-ENV CARAVEL_VERSION 0.10.0
+ENV CARAVEL_VERSION 0.11.0
 ENV CARAVEL_HOME /caravel
 ENV CAR_ROW_LIMIT 5000
 ENV CAR_WEBSERVER_THREADS 8
@@ -25,13 +25,17 @@ ENV DB_PACKAGES libpq-dev
 ENV DB_PIP_PACKAGES psycopg2
 
 RUN apt-get update \
-&& apt-get install -y build-essential libssl-dev libffi-dev $DB_PACKAGES
+&& apt-get install -y \
+  build-essential \
+  libssl-dev libffi-dev libsasl2-dev libldap2-dev \
+  $DB_PACKAGES
 
 RUN pip install $DB_PIP_PACKAGES flask-appbuilder
 RUN pip install caravel==$CARAVEL_VERSION
 
 # remove build dependencies
-RUN apt-get remove -y build-essential libffi-dev \
+RUN apt-get remove -y build-essential \
+  libssl-dev libffi-dev libsasl2-dev libldap2-dev \
 && apt-get -y autoremove && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir $CARAVEL_HOME
