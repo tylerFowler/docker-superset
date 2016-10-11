@@ -81,3 +81,7 @@ tylerfowler/caravel
 Note, however, that even if an existing Caravel configuration is detected, any user supplied `docker-entrypoint.sh` file will **still be run**. So if need be write a file that can be checked for to ensure your script only runs once in the same fashion that the `caravel-init.sh` script does.
 
 Enjoy!
+
+
+# TODO:
+- [ ] Work on decreasing size of the image (new dependencies in v0.11 doubled our size!)
