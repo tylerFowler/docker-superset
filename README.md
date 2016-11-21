@@ -85,3 +85,4 @@ Enjoy!
 
 # TODO:
 - [ ] Work on decreasing size of the image (new dependencies in v0.11 doubled our size!)
+- [ ] Reflect project renaming to "superset"
