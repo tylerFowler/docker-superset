@@ -2,23 +2,23 @@ FROM python:3.4-wheezy
 MAINTAINER Tyler Fowler <tylerfowler.1337@gmail.com>
 
 # Caravel setup options
-ENV CARAVEL_VERSION 0.13.2
-ENV CARAVEL_HOME /caravel
-ENV CAR_ROW_LIMIT 5000
-ENV CAR_WEBSERVER_THREADS 8
-ENV CAR_WEBSERVER_PORT 8088
-ENV CAR_SECRET_KEY 'thisismysecretkey'
-ENV CAR_META_DB_URI "sqlite:///${CARAVEL_HOME}/caravel.db"
-ENV CAR_CSRF_ENABLED True
+ENV SUPERSET_VERSION 0.13.2
+ENV SUPERSET_HOME /superset
+ENV SUP_ROW_LIMIT 5000
+ENV SUP_WEBSERVER_THREADS 8
+ENV SUP_WEBSERVER_PORT 8088
+ENV SUP_SECRET_KEY 'thisismysecretkey'
+ENV SUP_META_DB_URI "sqlite:///${SUPERSET_HOME}/superset.db"
+ENV SUP_CSRF_ENABLED True
 
-ENV PYTHONPATH $CARAVEL_HOME:$PYTHONPATH
+ENV PYTHONPATH $SUPERSET_HOME:$PYTHONPATH
 
 # admin auth details
 ENV ADMIN_USERNAME admin
 ENV ADMIN_FIRST_NAME admin
 ENV ADMIN_LAST_NAME user
 ENV ADMIN_EMAIL admin@nowhere.com
-ENV ADMIN_PWD caravel
+ENV ADMIN_PWD superset
 
 # by default only includes PostgreSQL because I'm selfish
 ENV DB_PACKAGES libpq-dev
@@ -29,7 +29,7 @@ RUN apt-get update \
   build-essential \
   libssl-dev libffi-dev libsasl2-dev libldap2-dev \
 && pip install --no-cache-dir \
-  $DB_PIP_PACKAGES flask-appbuilder superset==$CARAVEL_VERSION \
+  $DB_PIP_PACKAGES flask-appbuilder superset==$SUPERSET_VERSION \
 && apt-get remove -y \
   build-essential libssl-dev libffi-dev libsasl2-dev libldap2-dev \
 && apt-get -y autoremove && apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -39,14 +39,14 @@ RUN apt-get update && apt-get install -y $DB_PACKAGES \
 && apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # remove build dependencies
-RUN mkdir $CARAVEL_HOME
+RUN mkdir $SUPERSET_HOME
 
-COPY caravel-init.sh /caravel-init.sh
-RUN chmod +x /caravel-init.sh
+COPY superset-init.sh /superset-init.sh
+RUN chmod +x /superset-init.sh
 
-VOLUME $CARAVEL_HOME
+VOLUME $SUPERSET_HOME
 EXPOSE 8088
 
 # since this can be used as a base image adding the file /docker-entrypoint.sh
 # is all you need to do and it will be run *before* Caravel is set up
-ENTRYPOINT [ "/caravel-init.sh" ]
+ENTRYPOINT [ "/superset-init.sh" ]
