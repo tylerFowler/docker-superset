@@ -2,7 +2,7 @@ FROM python:3.4-wheezy
 MAINTAINER Tyler Fowler <tylerfowler.1337@gmail.com>
 
 # Caravel setup options
-ENV CARAVEL_VERSION 0.13.0
+ENV CARAVEL_VERSION 0.13.1
 ENV CARAVEL_HOME /caravel
 ENV CAR_ROW_LIMIT 5000
 ENV CAR_WEBSERVER_THREADS 8
