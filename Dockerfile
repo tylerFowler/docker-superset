@@ -2,7 +2,7 @@ FROM python:3.4-wheezy
 MAINTAINER Tyler Fowler <tylerfowler.1337@gmail.com>
 
 # Caravel setup options
-ENV SUPERSET_VERSION 0.13.2
+ENV SUPERSET_VERSION 0.15.0
 ENV SUPERSET_HOME /superset
 ENV SUP_ROW_LIMIT 5000
 ENV SUP_WEBSERVER_THREADS 8
