@@ -61,4 +61,4 @@ else
 fi
 
 echo "Starting up Caravel"
-superset runserver
+superset runserver -p 8088 -a 0.0.0.0
