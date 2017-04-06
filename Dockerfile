@@ -1,8 +1,8 @@
-FROM python:3.4-wheezy
+FROM python:3.6-slim
 MAINTAINER Tyler Fowler <tylerfowler.1337@gmail.com>
 
 # Caravel setup options
-ENV SUPERSET_VERSION 0.15.1
+ENV SUPERSET_VERSION 0.17.1
 ENV SUPERSET_HOME /superset
 ENV SUP_ROW_LIMIT 5000
 ENV SUP_WEBSERVER_THREADS 8
@@ -27,7 +27,7 @@ ENV DB_PIP_PACKAGES psycopg2
 
 RUN apt-get update \
 && apt-get install -y \
-  build-essential \
+  build-essential gcc \
   libssl-dev libffi-dev libsasl2-dev libldap2-dev \
 && pip install --no-cache-dir \
   $DB_PIP_PACKAGES flask-appbuilder superset==$SUPERSET_VERSION \
