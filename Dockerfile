@@ -25,6 +25,10 @@ ENV ADMIN_PWD superset
 ENV DB_PACKAGES libpq-dev
 ENV DB_PIP_PACKAGES psycopg2
 
+# Set up Athena support
+RUN ln -s /usr/bin/java /usr/bin/jvm
+ENV CLASSPATH /usr/local/lib/python3.6/site-packages/pyathenajdbc
+
 RUN apt-get update \
 && apt-get install -y \
   build-essential gcc \
