@@ -25,12 +25,16 @@ ENV ADMIN_PWD superset
 ENV DB_PACKAGES libpq-dev
 ENV DB_PIP_PACKAGES psycopg2 sqlalchemy-redshift
 
+# Set up Athena support
+RUN ln -s /usr/bin/java /usr/bin/jvm
+ENV CLASSPATH /usr/local/lib/python3.6/site-packages/pyathenajdbc
+
 RUN apt-get update \
 && apt-get install -y \
   build-essential gcc \
   libssl-dev libffi-dev libsasl2-dev libldap2-dev \
 && pip install --no-cache-dir \
-  $DB_PIP_PACKAGES flask-appbuilder superset==$SUPERSET_VERSION \
+  $DB_PIP_PACKAGES flask-appbuilder superset==$SUPERSET_VERSION "PyAthenaJDBC>1.0.9"\
 && apt-get remove -y \
   build-essential libssl-dev libffi-dev libsasl2-dev libldap2-dev \
 && apt-get -y autoremove && apt-get clean && rm -rf /var/lib/apt/lists/*
