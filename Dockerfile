@@ -1,7 +1,7 @@
 FROM python:3.6-slim
 MAINTAINER Tyler Fowler <tylerfowler.1337@gmail.com>
 
-# Caravel setup options
+# Superset setup options
 ENV SUPERSET_VERSION 0.18.3
 ENV SUPERSET_HOME /superset
 ENV SUP_ROW_LIMIT 5000
@@ -49,5 +49,5 @@ VOLUME $SUPERSET_HOME
 EXPOSE 8088
 
 # since this can be used as a base image adding the file /docker-entrypoint.sh
-# is all you need to do and it will be run *before* Caravel is set up
+# is all you need to do and it will be run *before* Superset is set up
 ENTRYPOINT [ "/superset-init.sh" ]
