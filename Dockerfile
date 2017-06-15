@@ -2,7 +2,7 @@ FROM python:3.6-slim
 MAINTAINER Tyler Fowler <tylerfowler.1337@gmail.com>
 
 # Superset setup options
-ENV SUPERSET_VERSION 0.18.3
+ENV SUPERSET_VERSION 0.18.4
 ENV SUPERSET_HOME /superset
 ENV SUP_ROW_LIMIT 5000
 ENV SUP_WEBSERVER_THREADS 8
