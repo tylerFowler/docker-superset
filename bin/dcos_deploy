@@ -1,0 +1,48 @@
+#!/bin/bash -x
+
+################################################################################
+# function
+################################################################################
+
+function _deploy_staging {
+    local app_image=$1
+    local webiq_image=docker.amz.relateiq.com/ops/webiq:$WEBCTL_VERSION
+    docker pull $webiq_image
+    docker run --rm \
+        $webiq_image webctl \
+        deploy \
+        $app_image \
+        --service-name threader-staging \
+        --hc-path /health \
+        --cpus 1 \
+        --mem 5120 \
+        --instances 1 \
+        --container-port 8080 \
+        --public \
+        --env IAM_ROLE=staging-service \
+        --cluster infra-staging.salesforceiq.com \
+        --use-api-key \
+        --wait
+        }
+
+################################################################################
+# parameter parsing
+################################################################################
+version=
+branch=staging
+while getopts "v:b:" opt; do
+    case $opt in
+        v) version=$OPTARG ;;
+        b) branch=$OPTARG ;;
+    esac
+done
+
+tag="${branch}-${version}"
+docker_image=docker.amz.relateiq.com/relateiq/threader:$tag
+
+################################################################################
+# main
+################################################################################
+if [ "$branch" = "staging" ]; then
+    _deploy_staging $docker_image 
+fi
