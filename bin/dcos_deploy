@@ -12,7 +12,7 @@ function _deploy_staging {
         $webiq_image webctl \
         deploy \
         $app_image \
-        --service-name threader-staging \
+        --service-name superset-staging \
         --hc-path /health \
         --cpus 1 \
         --mem 5120 \
@@ -38,7 +38,7 @@ while getopts "v:b:" opt; do
 done
 
 tag="${branch}-${version}"
-docker_image=docker.amz.relateiq.com/relateiq/threader:$tag
+docker_image=docker.amz.relateiq.com/relateiq/superset:$tag
 
 ################################################################################
 # main
