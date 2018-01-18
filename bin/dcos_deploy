@@ -13,12 +13,10 @@ function _deploy_staging {
         deploy \
         $app_image \
         --service-name superset-staging \
-        --hc-path /health \
         --cpus 1 \
         --mem 5120 \
         --instances 1 \
         --container-port 8080 \
-        --public \
         --env IAM_ROLE=staging-service \
         --cluster infra-staging.salesforceiq.com \
         --use-api-key \
