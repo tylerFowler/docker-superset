@@ -3,7 +3,7 @@ build:
 
 run:
 	docker run -d --name superset -p 8088:8088 tylerfowler/superset
-	echo "Check http://localhost:8088"
+	echo "Superset now running at http://localhost:8088"
 
 stop:
 	docker stop superset
