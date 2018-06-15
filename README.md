@@ -3,7 +3,7 @@ Superset
 
 [![](https://images.microbadger.com/badges/image/tylerfowler/superset.svg)](https://microbadger.com/images/tylerfowler/superset "Get your own image badge on microbadger.com")
 
-An extendable Docker image for Airbnb's [Superset](airbnb.io/superset) platform.
+An extendable Docker image for Airbnb's [Superset](https://superset.apache.org/) platform.
 
 # Basic Setup
 
