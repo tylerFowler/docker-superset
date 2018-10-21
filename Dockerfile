@@ -2,7 +2,7 @@ FROM python:3.6-slim
 MAINTAINER Tyler Fowler <tylerfowler.1337@gmail.com>
 
 # Superset setup options
-ENV SUPERSET_VERSION 0.27.0
+ENV SUPERSET_VERSION 0.28.0
 ENV SUPERSET_HOME /superset
 ENV SUP_ROW_LIMIT 5000
 ENV SUP_WEBSERVER_THREADS 8
@@ -33,9 +33,8 @@ RUN apt-get update \
   libssl-dev libffi-dev libsasl2-dev libldap2-dev \
 && pip install --no-cache-dir \
   $DB_PIP_PACKAGES flask-appbuilder superset==$SUPERSET_VERSION \
+  # As of v0.27.0 we must specify an older version of flask for compatibility
   'flask==0.12.4' \
-  # For v0.27.0 we need to specify the Markdown version
-  'markdown<3.0.0' \
 && apt-get remove -y \
   build-essential libssl-dev libffi-dev libsasl2-dev libldap2-dev \
 && apt-get -y autoremove && apt-get clean && rm -rf /var/lib/apt/lists/*
