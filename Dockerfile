@@ -33,6 +33,9 @@ RUN apt-get update \
   libssl-dev libffi-dev libsasl2-dev libldap2-dev \
 && pip install --no-cache-dir \
   $DB_PIP_PACKAGES flask-appbuilder superset==$SUPERSET_VERSION \
+  'flask==0.12.4' \
+  # For v0.27.0 we need to specify the Markdown version
+  'markdown<3.0.0' \
 && apt-get remove -y \
   build-essential libssl-dev libffi-dev libsasl2-dev libldap2-dev \
 && apt-get -y autoremove && apt-get clean && rm -rf /var/lib/apt/lists/*
