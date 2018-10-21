@@ -39,7 +39,9 @@ RUN apt-get update \
 
 # install DB packages separately
 RUN apt-get update && apt-get install -y $DB_PACKAGES \
-&& apt-get autoremove -y && apt-get clean && rm -rf /var/lib/apt/lists/*
+&& apt-get autoremove -y \
+&& apt-get clean \
+&& rm -rf /var/lib/apt/lists/*
 
 # remove build dependencies
 RUN mkdir $SUPERSET_HOME
