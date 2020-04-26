@@ -2,6 +2,8 @@
 
 set -eo pipefail
 
+export FLASK_APP=superset
+
 # check to see if the superset config already exists, if it does skip to
 # running the user supplied docker-entrypoint.sh, note that this means
 # that users can copy over a prewritten superset config and that will be used
@@ -37,19 +39,12 @@ if [ ! -f $SUPERSET_HOME/.setup-complete ]; then
   echo "Running first time setup for Superset"
 
   echo "Creating admin user ${ADMIN_USERNAME}"
-  cat > $SUPERSET_HOME/admin.config <<EOF
-${ADMIN_USERNAME}
-${ADMIN_FIRST_NAME}
-${ADMIN_LAST_NAME}
-${ADMIN_EMAIL}
-${ADMIN_PWD}
-${ADMIN_PWD}
-
-EOF
-
-  /bin/sh -c '/usr/local/bin/fabmanager create-admin --app superset < $SUPERSET_HOME/admin.config'
-
-  rm $SUPERSET_HOME/admin.config
+  /usr/local/bin/flask fab create-admin \
+    --username $ADMIN_USERNAME \
+    --firstname $ADMIN_FIRST_NAME \
+    --lastname $ADMIN_LAST_NAME \
+    --email $ADMIN_EMAIL \
+    --password $ADMIN_PWD
 
   echo "Initializing database"
   superset db upgrade
