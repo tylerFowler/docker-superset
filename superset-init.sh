@@ -64,4 +64,4 @@ else
 fi
 
 echo "Starting up Superset"
-superset runserver -p 8088 -a 0.0.0.0 -t ${SUP_WEBSERVER_TIMEOUT}
+superset run --port 8088 --host 0.0.0.0

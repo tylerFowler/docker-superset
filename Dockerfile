@@ -1,4 +1,4 @@
-FROM python:3.7-slim
+FROM python:3.8-slim
 MAINTAINER Tyler Fowler <tylerfowler.1337@gmail.com>
 
 # Superset setup options
