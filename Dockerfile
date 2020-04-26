@@ -35,7 +35,6 @@ RUN apt-get update \
 && pip install --no-cache-dir \
   $DB_PIP_PACKAGES apache-superset==$SUPERSET_VERSION \
   email_validator gunicorn[gevent] \
-  'flask-appbuilder<2.4.0' 'werkzeug<1.0.0' \
 && apt-get remove -y \
   build-essential libssl-dev libffi-dev libsasl2-dev libldap2-dev git \
 && apt-get -y autoremove && apt-get clean && rm -rf /var/lib/apt/lists/*
