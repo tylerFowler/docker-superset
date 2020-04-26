@@ -1,8 +1,8 @@
-FROM python:3.6-slim
+FROM python:3.7-slim
 MAINTAINER Tyler Fowler <tylerfowler.1337@gmail.com>
 
 # Superset setup options
-ENV SUPERSET_VERSION 0.28.1
+ENV SUPERSET_VERSION 0.34.0
 ENV SUPERSET_HOME /superset
 ENV SUP_ROW_LIMIT 5000
 ENV SUP_WEBSERVER_THREADS 8
@@ -29,18 +29,20 @@ ENV DB_PIP_PACKAGES psycopg2 sqlalchemy-redshift
 
 RUN apt-get update \
 && apt-get install -y \
+  $DB_PACKAGES \
   build-essential gcc \
   libssl-dev libffi-dev libsasl2-dev libldap2-dev \
 && pip install --no-cache-dir \
-  $DB_PIP_PACKAGES flask-appbuilder superset==$SUPERSET_VERSION \
+  $DB_PIP_PACKAGES apache-superset==$SUPERSET_VERSION \
+  email_validator gunicorn[gevent] \
+  'flask-appbuilder<2.3.0' 'werkzeug<1.0.0' \
   # As of v0.27.0 we must specify an older version of flask for compatibility
-  'flask==0.12.4' \
+  # 'flask==0.12.4' \
 && apt-get remove -y \
   build-essential libssl-dev libffi-dev libsasl2-dev libldap2-dev \
 && apt-get -y autoremove && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# install DB packages separately
-RUN apt-get update && apt-get install -y $DB_PACKAGES \
+RUN apt-get update \
 && apt-get autoremove -y \
 && apt-get clean \
 && rm -rf /var/lib/apt/lists/*
