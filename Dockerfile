@@ -1,8 +1,9 @@
-FROM python:3.8-slim
+# note that we must use Python 3.7 until pyarrow is updated to a version that supports 3.8
+FROM python:3.7-slim
 MAINTAINER Tyler Fowler <tylerfowler.1337@gmail.com>
 
 # Superset setup options
-ENV SUPERSET_VERSION 0.34.1
+ENV SUPERSET_VERSION 0.35.2
 ENV SUPERSET_HOME /superset
 ENV SUP_ROW_LIMIT 5000
 ENV SUP_WEBSERVER_THREADS 8
@@ -30,7 +31,7 @@ ENV DB_PIP_PACKAGES psycopg2-binary sqlalchemy-redshift
 RUN apt-get update \
 && apt-get install -y \
   $DB_PACKAGES \
-  build-essential gcc \
+  build-essential gcc git \
   libssl-dev libffi-dev libsasl2-dev libldap2-dev \
 && pip install --no-cache-dir \
   $DB_PIP_PACKAGES apache-superset==$SUPERSET_VERSION \
@@ -39,7 +40,7 @@ RUN apt-get update \
   # As of v0.27.0 we must specify an older version of flask for compatibility
   # 'flask==0.12.4' \
 && apt-get remove -y \
-  build-essential libssl-dev libffi-dev libsasl2-dev libldap2-dev \
+  build-essential libssl-dev libffi-dev libsasl2-dev libldap2-dev git \
 && apt-get -y autoremove && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update \
