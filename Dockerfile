@@ -1,5 +1,4 @@
-# note that we must use Python 3.7 until pyarrow is updated to a version that supports 3.8
-FROM python:3.7-slim
+FROM python:3.8-slim
 MAINTAINER Tyler Fowler <tylerfowler.1337@gmail.com>
 
 # Superset setup options
@@ -36,9 +35,7 @@ RUN apt-get update \
 && pip install --no-cache-dir \
   $DB_PIP_PACKAGES apache-superset==$SUPERSET_VERSION \
   email_validator gunicorn[gevent] \
-  'flask-appbuilder<2.3.0' 'werkzeug<1.0.0' \
-  # As of v0.27.0 we must specify an older version of flask for compatibility
-  # 'flask==0.12.4' \
+  'flask-appbuilder<2.4.0' 'werkzeug<1.0.0' \
 && apt-get remove -y \
   build-essential libssl-dev libffi-dev libsasl2-dev libldap2-dev git \
 && apt-get -y autoremove && apt-get clean && rm -rf /var/lib/apt/lists/*
