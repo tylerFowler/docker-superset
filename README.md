@@ -3,7 +3,9 @@ Superset
 
 [![](https://images.microbadger.com/badges/image/tylerfowler/superset.svg)](https://microbadger.com/images/tylerfowler/superset "Get your own image badge on microbadger.com")
 
-An extendable Docker image for Airbnb's [Superset](https://superset.apache.org/) platform.
+An extendable Docker image for deploying Apache's [Superset](https://superset.apache.org/) platform.
+
+_Disclaimer: This is not an official Docker image for Superset._
 
 # Basic Setup
 
@@ -81,3 +83,6 @@ tylerfowler/superset
 Note, however, that even if an existing Superset configuration is detected, any user supplied `docker-entrypoint.sh` file will **still be run**. So if need be write a file that can be checked for to ensure your script only runs once in the same fashion that the `superset-init.sh` script does.
 
 Enjoy!
+
+## Disclaimer
+Apache Superset, Apache, Superset, the Superset logo, and the Apache feather logo are either registered trademarks or trademarks of The Apache Software Foundation
