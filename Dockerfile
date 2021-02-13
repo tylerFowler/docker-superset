@@ -2,7 +2,7 @@ FROM python:3.8-slim
 MAINTAINER Tyler Fowler <tylerfowler.1337@gmail.com>
 
 # Superset setup options
-ENV SUPERSET_VERSION 0.37.2
+ENV SUPERSET_VERSION 0.38.0
 ENV SUPERSET_HOME /superset
 ENV SUP_ROW_LIMIT 5000
 ENV SUP_WEBSERVER_THREADS 8
@@ -35,7 +35,7 @@ RUN apt-get update \
   libssl-dev libffi-dev libsasl2-dev libldap2-dev \
 && pip install --no-cache-dir \
   $DB_PIP_PACKAGES apache-superset==$SUPERSET_VERSION \
-  email_validator gunicorn[gevent] \
+  email_validator gunicorn[gevent] pillow PyJWT==1.7.1 \
 && apt-get remove -y \
   build-essential libssl-dev libffi-dev libsasl2-dev libldap2-dev git \
 && apt-get -y autoremove && apt-get clean && rm -rf /var/lib/apt/lists/*
