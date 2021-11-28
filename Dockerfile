@@ -8,7 +8,8 @@ ENV SUP_ROW_LIMIT 5000
 ENV SUP_WEBSERVER_THREADS 8
 ENV SUP_WEBSERVER_WORKERS 10
 ENV SUP_WEBSERVER_PORT 8088
-ENV SUP_WEBSERVER_TIMEOUT 60
+ENV SUP_WEBSERVER_TIMEOUT 300
+ENV SUP_WEBSERVER_LOG_LEVEL info
 ENV SUP_SECRET_KEY 'thisismysecretkey'
 ENV SUP_META_DB_URI "sqlite:///${SUPERSET_HOME}/superset.db"
 ENV SUP_CSRF_ENABLED True
@@ -35,7 +36,7 @@ RUN apt-get update \
   libssl-dev libffi-dev libsasl2-dev libldap2-dev \
 && pip install --no-cache-dir \
   $DB_PIP_PACKAGES apache-superset==$SUPERSET_VERSION \
-  email_validator gunicorn[gevent] pillow PyJWT==1.7.1 \
+  email_validator gunicorn[gevent] pillow \
 && apt-get remove -y \
   build-essential libssl-dev libffi-dev libsasl2-dev libldap2-dev git \
 && apt-get -y autoremove && apt-get clean && rm -rf /var/lib/apt/lists/*
